@@ -539,11 +539,32 @@
 </div>
 <script>
   fetch('/cafes.json').then(r => r.json()).then(cafes => {
-    const sel = document.getElementById('cafeSelect');
-    sel.innerHTML = cafes.length
-      ? cafes.map(c => `<option value="${c.id}" data-email="${c.email}">${c.name} — ${c.city}</option>`).join('')
-      : '<option disabled selected>Hozircha hamkor yo\'q</option>';
+    const sel = document.getElementById('leadForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const cafeSel = document.getElementById('cafeSelect');
+  const cafeOpt = cafeSel.options[cafeSel.selectedIndex];
+
+  const res = await fetch('/api/send-request', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      cafeId: cafeOpt.value,
+      cafeName: cafeOpt.textContent,
+      cafeEmail: cafeOpt.dataset.email,
+      yourName: document.getElementById('yourName').value,
+      phone: document.getElementById('phone').value,
+      city: document.getElementById('city').value,
+      when: document.getElementById('when').value
+    })
   });
+
+  if (res.ok) {
+    document.getElementById('leadForm').style.display = 'none';
+    document.getElementById('leadConfirm').classList.add('show');
+  } else {
+    alert('Xatolik yuz berdi, birozdan keyin qayta urinib ko\'ring.');
+  }
+});
 </script>
             <input id="restName" type="text" required placeholder="Masalan: Osh & Choy">
           </div>
