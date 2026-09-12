@@ -533,6 +533,18 @@
         <div class="row2">
           <div>
             <label for="restName">Restoran / kafe nomi</label>
+            <div>
+  <label for="cafeSelect">Kafe / restoran tanlang</label>
+  <select id="cafeSelect" required></select>
+</div>
+<script>
+  fetch('/cafes.json').then(r => r.json()).then(cafes => {
+    const sel = document.getElementById('cafeSelect');
+    sel.innerHTML = cafes.length
+      ? cafes.map(c => `<option value="${c.id}" data-email="${c.email}">${c.name} — ${c.city}</option>`).join('')
+      : '<option disabled selected>Hozircha hamkor yo\'q</option>';
+  });
+</script>
             <input id="restName" type="text" required placeholder="Masalan: Osh & Choy">
           </div>
           <div>
