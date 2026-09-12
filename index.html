@@ -579,6 +579,46 @@
 </footer>
 
 <script>
+  // Har bir restoran/kafe adminining Telegram ma'lumotlari
+const BOT_TOKEN = "7123456789:AAH..."; // Adminning Bot Tokeni
+const ADMIN_CHAT_ID = "123456789";    // Adminning Telegram Chat ID'si
+
+document.getElementById('leadForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const restName = document.getElementById('restName').value;
+  const yourName = document.getElementById('yourName').value;
+  const phone = document.getElementById('phone').value;
+  const city = document.getElementById('city').value;
+  const when = document.getElementById('when').value;
+
+  const text = `🚨 *YANGI STOL BRON SO'ROVI!*\n\n` +
+               `🏢 *Restoran:* ${restName}\n` +
+               `👤 *Mijoz ismi:* ${yourName}\n` +
+               `📞 *Tel:* ${phone}\n` +
+               `📍 *Shahar/Hudud:* ${city}\n` +
+               `⏰ *Vaqt va Sanasi:* ${when}\n\n` +
+               `⚡ *Iltimos, mijoz bilan darhol bog'laning!*`;
+
+  try {
+    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: ADMIN_CHAT_ID,
+        text: text,
+        parse_mode: 'Markdown'
+      })
+    });
+
+    // Muvaffaqiyatli yuborilgach ko'rsatish
+    document.getElementById('leadForm').style.display = 'none';
+    document.getElementById('leadConfirm').classList.add('show');
+  } catch (err) {
+    alert("Xatolik yuz berdi. Qayta urinib ko'ring!");
+  }
+});
+
   // Party size stepper (No limit)
   const partyInput = document.getElementById('partyInput');
   document.getElementById('plus').addEventListener('click', () => {
