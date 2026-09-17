@@ -528,5 +528,83 @@
                 submitBtn.disabled = false;
             }
         }
+        // NEW TIMER & CAFE REGISTRATION LOGIC
+        let days = 29, hours = 23, minutes = 59, seconds = 55;
+
+        setInterval(() => {
+            seconds--;
+            if (seconds < 0) { seconds = 59; minutes--; }
+            if (minutes < 0) { minutes = 59; hours--; }
+            if (hours < 0) { hours = 23; days--; }
+
+            const timerText = `${days} kun : ${hours < 10 ? '0' + hours : hours} soat : ${minutes < 10 ? '0' + minutes : minutes} daqiqa : ${seconds < 10 ? '0' + seconds : seconds} soniya`;
+            const el = document.getElementById('modalTimer');
+            if (el) el.innerText = timerText;
+        }, 1000);
+
+        function addPhoneInput() {
+            const container = document.getElementById('phoneInputsContainer');
+            if (container.children.length >= 5) {
+                alert("Maksimal 5 ta telefon raqam qo'shishingiz mumkin.");
+                return;
+            }
+            const newInput = document.createElement('input');
+            newInput.type = 'tel';
+            newInput.className = 'cafe-phone-input w-full bg-slate-900 border border-slate-800 text-white rounded-xl px-3.5 py-2 text-xs focus:outline-none focus:border-brand-500 mt-1';
+            newInput.placeholder = `+998 90 (${container.children.length + 1}-qo'shimcha raqam)`;
+            container.appendChild(newInput);
+        }
+
+        async function sendCafeRegistration(e) {
+            e.preventDefault();
+
+            const cafeName = document.getElementById('regCafeName').value;
+            const region = document.getElementById('regRegion').value;
+            const photoUrl = document.getElementById('regPhotoUrl').value || "Rasm biriktirilmagan";
+            const btn = document.getElementById('regSubmitBtn');
+            const statusMsg = document.getElementById('regStatusMsg');
+
+            const phoneElements = document.querySelectorAll('.cafe-phone-input');
+            let phoneList = [];
+            phoneElements.forEach((inp, idx) => {
+                if (inp.value.trim() !== "") {
+                    phoneList.push(`${idx + 1}. ${inp.value.trim()}`);
+                }
+            });
+
+            btn.textContent = "Yuborilmoqda...";
+            btn.disabled = true;
+
+            const text = `🚨 *YANGI KAFE OBUNA ARIZASI! (30 KUN)*\n\n` +
+                         `🏢 *Kafe Nomi:* ${cafeName}\n` +
+                         `📍 *Viloyat:* ${region}\n` +
+                         `🖼️ *Rasm URL:* ${photoUrl}\n\n` +
+                         `📞 *Admin Raqamlari:* \n${phoneList.join('\n')}\n\n` +
+                         `⏳ *Obuna Taymeri:* 30 Kun (29:23:59:55)\n` +
+                         `💰 *To'lov:* $35 P2P Qabul Qilindi.`;
+
+            try {
+                await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ chat_id: CHAT_ID, text: text, parse_mode: 'Markdown' })
+                });
+
+                statusMsg.classList.remove('hidden');
+                setTimeout(() => {
+                    closeModal();
+                    statusMsg.classList.add('hidden');
+                    btn.textContent = "To'lov Qilindi (Arizani Yuborish)";
+                    btn.disabled = false;
+                }, 2500);
+            } catch (err) {
+                alert("Xatolik yuz berdi. Bot Tokenini tekshiring.");
+                btn.textContent = "To'lov Qilindi (Arizani Yuborish)";
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
     </script>
 
