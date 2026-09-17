@@ -8,34 +8,51 @@ export default function Home() {
   const [showSubscribe, setShowSubscribe] = useState(false);
 
   return (
-    <div style={{ backgroundColor: '#0d0d0d', minHeight: '100vh', color: '#fff', fontFamily: 'sans-serif' }}>
+    <div style={{ backgroundColor: '#0a0a0a', minHeight: '100vh', color: '#fff', fontFamily: 'Inter, sans-serif' }}>
       
-      {/* Header / Topbar */}
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 40px', borderBottom: '1px solid #222' }}>
-        <h1 style={{ color: '#FFC107', fontSize: '24px', margin: 0 }}>Mehmon•AI</h1>
+      {/* Top Navigation */}
+      <header style={{ 
+        display: 'flex', 
+        justify: 'space-between', 
+        alignItems: 'center', 
+        padding: '16px 24px', 
+        backgroundColor: '#121212',
+        borderBottom: '1px solid #222',
+        position: 'sticky',
+        top: 0,
+        zIndex: 100
+      }}>
+        <div style={{ fontWeight: '800', fontSize: '20px', color: '#FFC107', letterSpacing: '-0.5px' }}>
+          Mehmon•AI
+        </div>
         
         <button 
           onClick={() => setShowSubscribe(true)}
-          style={{ backgroundColor: '#FFC107', color: '#000', padding: '10px 20px', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}
+          style={{ 
+            backgroundColor: '#FFC107', 
+            color: '#000', 
+            padding: '10px 18px', 
+            border: 'none', 
+            borderRadius: '10px', 
+            fontWeight: '700', 
+            fontSize: '14px',
+            cursor: 'pointer',
+            boxShadow: '0 4px 12px rgba(255, 193, 7, 0.2)'
+          }}
         >
-          $35 Obuna bo'lish (B2B)
+          $35 Obuna bo'lish
         </button>
       </header>
 
-      {/* Main Content */}
-      <main style={{ maxWidth: '1100px', margin: '0 auto', padding: '40px 20px' }}>
+      {/* Main App Container */}
+      <main style={{ maxWidth: '800px', margin: '0 auto', padding: '24px 16px' }}>
         
-        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <h2 style={{ fontSize: '36px', marginBottom: '10px' }}>O'zbekistondagi Eng Zo'r Restoran va Kafelarni Toping</h2>
-          <p style={{ color: '#aaa' }}>Stollarni onlayn va 10 soniyada bron qiling</p>
-        </div>
-
-        {/* 1. POISK VA FILTER QISMI */}
+        {/* Clean Search & Filtering */}
         <SearchSection onSelectCafe={(cafe) => setSelectedCafe(cafe)} />
 
       </main>
 
-      {/* 2. BRON QILISH MODAL OYNASI */}
+      {/* Booking Modal */}
       {selectedCafe && (
         <BookingModal 
           selectedCafe={selectedCafe} 
@@ -43,7 +60,7 @@ export default function Home() {
         />
       )}
 
-      {/* 3. $35 B2B OBUNA MODAL OYNASI */}
+      {/* B2B Subscription Modal */}
       {showSubscribe && (
         <SubscribeModal 
           onClose={() => setShowSubscribe(false)} 
@@ -53,3 +70,4 @@ export default function Home() {
     </div>
   );
 }
+
