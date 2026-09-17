@@ -1,54 +1,44 @@
-// Vercel serverless function.
-// Deploy path: /api/send-request.js  ->  available at POST /api/send-request
-
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    return res.status(405).json({ message: 'Method Not Allowed' });
   }
 
-  const { cafeId, cafeName, cafeEmail, yourName, phone, city, when, party, day, time } = req.body || {};
+  const { cafeName, city, yourName, phone, date, guests } = req.body;
 
-  // Basic validation — reject if required fields are missing
-  if (!cafeEmail || !yourName || !phone) {
-    return res.status(400).json({ error: 'Majburiy maydonlar to\'ldirilmagan' });
-  }
+  const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+  const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+
+  const messageText = `
+🔥 **Mehmon•AI — Yangi Bron So'rovi!**
+
+🏢 **Kafe:** ${cafeName || 'Tanlanmagan'}
+📍 **Hudud:** ${city || 'Kiritilmagan'}
+👤 **Mijoz:** ${yourName}
+📞 **Tel:** ${phone}
+📅 **Sana/Vaqt:** ${date || 'Ko\'rsatilmagan'}
+👥 **Kishilar soni:** ${guests || 1} ta
+  `;
 
   try {
-    const emailResponse = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        // While your domain isn't verified in Resend yet, use 'onboarding@resend.dev' here instead.
-        from: 'Mehmon AI <[email protected]>',
-        to: cafeEmail,
-        reply_to: undefined,
-        subject: `Yangi so'rov — ${cafeName || 'Mehmon AI'}`,
-        text: [
-          `Yangi bron/demo so'rovi keldi:`,
-          ``,
-          `Ism: ${yourName}`,
-          `Telefon: ${phone}`,
-          `Shahar: ${city || '-'}`,
-          party ? `Odam soni: ${party}` : null,
-          day ? `Kun: ${day}` : null,
-          time ? `Vaqt: ${time}` : null,
-          when ? `Qulay bog'lanish vaqti: ${when}` : null,
-          ``,
-          `Tanlangan joy ID: ${cafeId || '-'}`
-        ].filter(Boolean).join('\n')
-      })
-    });
+    const telegramRes = await fetch(
+      `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: messageText,
+          parse_mode: 'Markdown',
+        }),
+      }
+    );
 
-    if (!emailResponse.ok) {
-      const detail = await emailResponse.text();
-      return res.status(502).json({ error: 'Email yuborilmadi', detail });
+    if (telegramRes.ok) {
+      return res.status(200).json({ success: true, message: 'Bron muvaffaqiyatli yuborildi!' });
+    } else {
+      return res.status(500).json({ success: false, message: 'Botga yuborishda xatolik.' });
     }
-
-    return res.status(200).json({ ok: true });
-  } catch (err) {
-    return res.status(500).json({ error: 'Server xatosi', detail: String(err) });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: 'Server xatoligi.' });
   }
 }
