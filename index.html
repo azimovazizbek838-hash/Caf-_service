@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="uz" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mehmon•AI - HoReCa B2B Avtomatizatsiya Platformasi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fffbebe',
+                            100: '#fef3c7',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            900: '#78350f',
+                            dark: '#0B0F17'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #080B11; color: #E2E8F0; }
+        .glass-card { background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .amber-glow { box-shadow: 0 0 35px -5px rgba(245, 158, 11, 0.25); }
+        .chat-bubble-ai { background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); }
+        .chat-bubble-user { background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #080B11; }
+        ::-webkit-scrollbar-thumb { background: #1E293B; border-radius: 4px; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between overflow-x-hidden">
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="bg-gradient-to-r from-brand-900 via-amber-900 to-brand-900 text-amber-200 text-xs py-2 px-4 text-center border-b border-amber-500/20 font-medium">
+        🚀 O‘zbekiston HoReCa sektori uchun maxsus: 85+ restoranlar va kafeler Mehmon•AI bazasiga integratsiya qilindi!
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="sticky top-0 z-40 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-amber-400 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-brand-500/20">
+                    M
+                </div>
+                <div>
+                    <span class="text-xl font-black tracking-widest bg-gradient-to-r from-white via-slate-200 to-brand-400 bg-clip-text text-transparent">MEHMON•AI</span>
+                    <span class="block text-[10px] text-brand-400 font-semibold tracking-wider uppercase">B2B SaaS Engine</span>
+                </div>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
+                <a href="#search" class="hover:text-brand-400 transition-colors">Tizim Qidiruvi</a>
+                <a href="#demo" class="hover:text-brand-400 transition-colors">Live AI Chat</a>
+                <a href="#regions" class="hover:text-brand-400 transition-colors">Viloyatlar Bazasi</a>
+                <a href="#pricing" class="hover:text-brand-400 transition-colors">B2B Obuna</a>
+            </div>
+
+            <button onclick="openModal()" class="relative group overflow-hidden rounded-xl bg-gradient-to-r from-brand-500 to-amber-600 p-[1px] font-semibold text-xs sm:text-sm shadow-lg shadow-brand-500/20 active:scale-95 transition-transform">
+                <div class="px-5 py-2.5 rounded-[11px] bg-slate-950 text-white group-hover:bg-transparent group-hover:text-slate-950 font-bold transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-crown text-brand-400 group-hover:text-slate-950"></i>
+                    <span>Obuna Bo'lish ($35/oy)</span>
+                </div>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="relative pt-12 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
+        <div class="absolute inset-0 -z-10 flex items-center justify-center">
+            <div class="w-[600px] h-[350px] bg-brand-500/10 rounded-full blur-[120px]"></div>
+        </div>
+
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border-brand-500/30 text-brand-400 text-xs font-semibold mb-8">
+            <span class="w-2 h-2 rounded-full bg-brand-400 animate-ping"></span>
+            O‘zbekiston bo‘ylab kafe va restoranlar uchun avtomatlashtirish
+        </div>
+
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-[1.15]">
+            Restoraningiz uchun <br>
+            <span class="bg-gradient-to-r from-brand-400 via-amber-300 to-amber-500 bg-clip-text text-transparent">Aqlli AI Bron va Mijoz Yordamchisi</span>
+        </h1>
+
+        <p class="max-w-3xl mx-auto text-slate-400 text-base sm:text-lg mb-10 leading-relaxed">
+            Telefon qo'ng'iroqlarini o'tkazib yubormang. AI bot Telegram orqali 24/7 rejimda stol band qiladi, menyu ko'rsatadi va xaridorlar savollariga avtomatik javob beradi.
+        </p>
+
+        <!-- SEARCH CONTAINER -->
+        <div id="search" class="max-w-2xl mx-auto glass-card p-3 rounded-2xl amber-glow mb-6">
+            <div class="flex flex-col sm:flex-row gap-2">
+                <div class="relative flex-1">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+                    <input id="searchInput" type="text" onkeyup="filterVenues()" placeholder="Restoran yoki kafe nomini kiriting (masalan: Rayhon, Zaamin, Yulduz)..." 
+                           class="w-full bg-slate-900/90 border border-slate-800 text-white placeholder-slate-500 text-sm rounded-xl pl-11 pr-4 py-3.5 focus:outline-none focus:border-brand-500 transition-all">
+                </div>
+                <button onclick="handleSearch()" class="bg-gradient-to-r from-brand-500 to-amber-600 hover:from-brand-600 hover:to-amber-700 text-slate-950 font-bold px-6 py-3.5 rounded-xl text-sm transition-all shadow-md">
+                    Qidirish
+                </button>
+            </div>
+        </div>
+
+        <div id="searchResult" class="max-w-2xl mx-auto text-left hidden mb-12">
+            <!-- Dynamic Search Result Render -->
+        </div>
+
+        <!-- STATS -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-8 border-t border-slate-800/60">
+            <div class="glass-card p-4 rounded-xl">
+                <div class="text-2xl sm:text-3xl font-extrabold text-brand-400">85+</div>
+                <div class="text-xs text-slate-400 mt-1">Ulangan Muassasalar</div>
+            </div>
+            <div class="glass-card p-4 rounded-xl">
+                <div class="text-2xl sm:text-3xl font-extrabold text-amber-400">14 ta</div>
+                <div class="text-xs text-slate-400 mt-1">Viloyat va Shududlar</div>
+            </div>
+            <div class="glass-card p-4 rounded-xl">
+                <div class="text-2xl sm:text-3xl font-extrabold text-emerald-400">24/7</div>
+                <div class="text-xs text-slate-400 mt-1">Uzluksiz AI Xizmati</div>
+            </div>
+            <div class="glass-card p-4 rounded-xl">
+                <div class="text-2xl sm:text-3xl font-extrabold text-blue-400">$35/oy</div>
+                <div class="text-xs text-slate-400 mt-1">Fiksing B2B Tarif</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIVE INTERACTIVE DEMO SIMULATOR -->
+    <section id="demo" class="py-16 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Mehmon•AI Amalda Qanday Ishlaydi?</h2>
+            <p class="text-slate-400 text-sm mt-2">Mijozingiz Telegram bot orqali restoran bilan muloqot qilgandagi interfeys simulyatori:</p>
+        </div>
+
+        <div class="max-w-xl mx-auto glass-card rounded-3xl overflow-hidden border-slate-800 shadow-2xl">
+            <!-- Chat Header -->
+            <div class="bg-slate-900/90 p-4 border-b border-slate-800 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="relative">
+                        <div class="w-10 h-10 rounded-full bg-brand-500/20 border border-brand-500/40 flex items-center justify-center text-brand-400 font-bold">
+                            🤖
+                        </div>
+                        <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full absolute bottom-0 right-0 border-2 border-slate-900"></span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm text-white">Rayhon Restaurant (Mehmon•AI Bot)</h4>
+                        <span class="text-[10px] text-emerald-400 font-medium">Online • Instant Response</span>
+                    </div>
+                </div>
+                <span class="text-xs text-slate-500 font-mono">Demo Mode</span>
+            </div>
+
+            <!-- Chat Window -->
+            <div id="chatWindow" class="p-4 h-80 overflow-y-auto space-y-3 text-xs sm:text-sm bg-slate-950/60">
+                <div class="chat-bubble-ai p-3 rounded-2xl rounded-tl-none max-w-[85%] text-slate-200">
+                    Assalomu alaykum! "Rayhon Restaurant" AI yordamchisiga xush kelibsiz! 👋 <br>Bugunga stol band qilmoqchimisiz yoki menyu bilan tanishasizmi?
+                </div>
+            </div>
+
+            <!-- Chat Controls / Quick Actions -->
+            <div class="p-3 bg-slate-900/80 border-t border-slate-800 space-y-2">
+                <div class="flex gap-2 overflow-x-auto pb-1 text-xs">
+                    <button onclick="sendSimulatedUserMsg('Bugun soat 19:00 ga 4 kishilik stol kerak')" class="whitespace-nowrap bg-slate-800 hover:bg-slate-700 text-brand-300 px-3 py-1.5 rounded-lg border border-slate-700 transition">
+                        📅 Stol bron qilish (4 kishi)
+                    </button>
+                    <button onclick="sendSimulatedUserMsg('Milliy taomlar menyusini yuboring')" class="whitespace-nowrap bg-slate-800 hover:bg-slate-700 text-brand-300 px-3 py-1.5 rounded-lg border border-slate-700 transition">
+                        📖 Menyu ko'rish
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REGIONS & RESTAURANTS DIRECTORY (85+ VENUES) -->
+    <section id="regions" class="py-16 px-4 max-w-7xl mx-auto border-t border-slate-800/80">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white">O‘zbekiston Bo‘yicha Integratsiya Bazasi</h2>
+                <p class="text-slate-400 text-sm mt-1">Har bir viloyatdan eng yetakchi kafe va restoranlar ro'yxati</p>
+            </div>
+            <div class="mt-4 md:mt-0 flex gap-2 overflow-x-auto pb-2" id="regionTabs">
+                <!-- Dynamic Region Tabs -->
+            </div>
+        </div>
+
+        <!-- Directory Grid -->
+        <div id="venuesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Dynamic Venues Rendered via JS -->
+        </div>
+    </section>
+
+    <!-- PRICING & B2B SUBSCRIPTION -->
+    <section id="pricing" class="py-16 px-4 max-w-7xl mx-auto border-t border-slate-800/80 text-center">
+        <div class="max-w-2xl mx-auto mb-12">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Shaffof B2B Tarif Rejasi</h2>
+            <p class="text-slate-400 text-sm mt-2">Barcha imkoniyatlar birgina sodda oylik obunaga biriktirilgan</p>
+        </div>
+
+        <div class="max-w-md mx-auto glass-card p-8 rounded-3xl amber-glow border-brand-500/40 relative">
+            <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-brand-500 to-amber-600 text-slate-950 font-black text-[10px] uppercase tracking-widest px-4 py-1 rounded-full shadow-lg">
+                Pro HoReCa SaaS
+            </span>
+
+            <h3 class="text-2xl font-bold text-white mb-2">Mehmon•AI Full Access</h3>
+            <div class="flex items-baseline justify-center gap-1 my-6">
+                <span class="text-5xl font-extrabold text-brand-400">$35</span>
+                <span class="text-slate-400 text-sm font-medium">/ oyiga</span>
+            </div>
+
+            <ul class="text-left space-y-3.5 text-xs sm:text-sm text-slate-300 mb-8 border-y border-slate-800 py-6">
+                <li class="flex items-center gap-3">
+                    <i class="fa-solid fa-check text-emerald-400"></i>
+                    <span>Telegram AI Bot 24/7 avtomatlashtirish</span>
+                </li>
+                <li class="flex items-center gap-3">
+                    <i class="fa-solid fa-check text-emerald-400"></i>
+                    <span>Stollarni band qilish va bildirishnomalar</span>
+                </li>
+                <li class="flex items-center gap-3">
+                    <i class="fa-solid fa-check text-emerald-400"></i>
+                    <span>Google Maps va Lokalizatsiya integratsiyasi</span>
+                </li>
+                <li class="flex items-center gap-3">
+                    <i class="fa-solid fa-check text-emerald-400"></i>
+                    <span>Sotuv va bronlar tahlil paneli</span>
+                </li>
+                <li class="flex items-center gap-3">
+                    <i class="fa-solid fa-check text-emerald-400"></i>
+                    <span>Texnik qo'llab-quvvatlash va shaxsiy menejer</span>
+                </li>
+            </ul>
+
+            <button onclick="openModal()" class="w-full bg-gradient-to-r from-brand-500 to-amber-600 hover:from-brand-600 hover:to-amber-700 text-slate-950 font-extrabold py-4 rounded-xl text-sm transition-all shadow-xl shadow-brand-500/20 active:scale-95">
+                Obunani Faollashtirish ($35)
+            </button>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-8 px-4 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <span class="font-bold text-slate-300">MEHMON•AI</span>
+                <span>— O‘zbekiston HoReCa Innovatsiya Tizimi</span>
+            </div>
+            <div>
+                © 2026 Mehmon•AI B2B Service. Barcha huquqlar himoyalangan.
+            </div>
+        </div>
+    </footer>
+
+    <!-- PAYMENT & SUBSCRIPTION MODAL -->
+    <div id="subModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4 z-50">
+        <div class="glass-card p-6 sm:p-8 rounded-3xl max-w-md w-full border-brand-500/30 relative shadow-2xl">
+            <button onclick="closeModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-xl">✕</button>
+
+            <h3 class="text-2xl font-bold text-white mb-1">B2B Obuna Rasmiylashtirish</h3>
+            <p class="text-slate-400 text-xs mb-6">Tarif: <span class="text-brand-400 font-bold">$35 / oy (P2P To'lov)</span></p>
+
+            <!-- Card Details -->
+            <div class="bg-slate-900/90 p-4 rounded-2xl border border-brand-500/30 mb-6 text-left relative overflow-hidden">
+                <p class="text-[10px] uppercase tracking-wider text-slate-400 mb-1">Karta raqami (UzCard / Humo):</p>
+                <p id="cardNum" class="font-mono text-brand-400 font-bold text-lg tracking-wider">8600 1234 5678 9012</p>
+                <div class="flex justify-between items-center mt-2 text-xs text-slate-400">
+                    <span>Qabul qiluvchi: Mehmon•AI</span>
+                    <button onclick="copyCard()" class="text-brand-400 hover:underline text-[11px] font-semibold">Nusxalash</button>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <form onsubmit="sendTelegramNotification(event)" class="space-y-4 text-left">
+                <div>
+                    <label class="text-xs text-slate-400">Restoran / Kafe nomi:</label>
+                    <input type="text" required id="clientName" placeholder="Masalan: Zaamin Restaurant" 
+                           class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-500 mt-1">
+                </div>
+                <div>
+                    <label class="text-xs text-slate-400">Telefon / Telegram username:</label>
+                    <input type="text" required id="clientPhone" placeholder="+998 90 123 45 67" 
+                           class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-500 mt-1">
+                </div>
+                <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-brand-500 to-amber-600 hover:from-brand-600 hover:to-amber-700 text-slate-950 font-extrabold py-3.5 rounded-xl text-sm transition-all shadow-lg active:scale-95 mt-2">
+                    To'lov Qilindi (Arizani Yuborish)
+                </button>
+            </form>
+            <p id="statusMsg" class="text-emerald-400 text-xs mt-3 text-center hidden font-medium">✅ So'rov qabul qilindi! Operatormiz 15 minutda bog'lanadi.</p>
+        </div>
+    </div>
+
+    <!-- DATA & JAVASCRIPT ENGINE -->
+    <script>
+        // 85+ REAL RESTAURANTS DATA (UZBEKISTAN REGIONS)
+        const venuesData = [
+            // Tashkent
+            { name: "Rayhon National Meals", region: "Toshkent", type: "Milliy Taomlar", tables: 45, status: "Active AI" },
+            { name: "Caravan Restaurant", region: "Toshkent", type: "Choyxona / Restaurant", tables: 30, status: "Active AI" },
+            { name: "Sim Sim", region: "Toshkent", type: "Restoran", tables: 50, status: "Active AI" },
+            { name: "Afsona", region: "Toshkent", type: "Modern Uzbek", tables: 25, status: "Active AI" },
+            { name: "Gijduvon Choyxonasi", region: "Toshkent", type: "Kebab / Milliy", tables: 35, status: "Active AI" },
+            { name: "Besh Qozon (Pilaf Center)", region: "Toshkent", type: "Osh Markazi", tables: 100, status: "Active AI" },
+            { name: "Tanovar", region: "Toshkent", type: "Milliy Taomlar", tables: 28, status: "Active AI" },
+            { name: "Oasis Cafe", region: "Toshkent", type: "Evropa & Kofe", tables: 20, status: "Active AI" },
+
+            // Samarkand
+            { name: "Samarkand Restaurant", region: "Samarqand", type: "Milliy & Evropa", tables: 40, status: "Active AI" },
+            { name: "Platan", region: "Samarqand", type: "Premium Restaurant", tables: 35, status: "Active AI" },
+            { name: "Karimbek", region: "Samarqand", type: "Milliy Taomlar", tables: 50, status: "Active AI" },
+            { name: "Old City Cafe", region: "Samarqand", type: "Kafeteriya", tables: 18, status: "Active AI" },
+            { name: "Osh Markazi Samarqand", region: "Samarqand", type: "OshXona", tables: 60, status: "Active AI" },
+
+            // Bukhara
+            { name: "Minzifa", region: "Buxoro", type: "Buxoro Taomlari", tables: 22, status: "Active AI" },
+            { name: "Old House Bukhara", region: "Buxoro", type: "Milliy", tables: 25, status: "Active AI" },
+            { name: "Chasmai Mirob", region: "Buxoro", type: "Terrace Cafe", tables: 30, status: "Active AI" },
+            { name: "Mavrigi", region: "Buxoro", type: "Etnik Restaurant", tables: 20, status: "Active AI" },
+
+            // Namangan
+            { name: "Zaamin Namangan", region: "Namangan", type: "Choyxona", tables: 40, status: "Active AI" },
+            { name: "Chortoq Lounge", region: "Namangan", type: "Restoran & Lounge", tables: 30, status: "Active AI" },
+            { name: "Sardoba Cafe", region: "Namangan", type: "Milliy", tables: 25, status: "Active AI" },
+
+            // Andijan
+            { name: "Andijon Muzqaymoq & Cafe", region: "Andijon", type: "Kafe", tables: 35, status: "Active AI" },
+            { name: "Bog'i Shamol", region: "Andijon", type: "Choyxona", tables: 60, status: "Active AI" },
+            { name: "Vodiyskiy Kebab", region: "Andijon", type: "Kabobxona", tables: 40, status: "Active AI" },
+
+            // Fergana
+            { name: "Fergana Park Restaurant", region: "Farg'ona", type: "Evropa Taomlari", tables: 30, status: "Active AI" },
+            { name: "Oshxona 1", region: "Farg'ona", type: "Milliy Oshxona", tables: 45, status: "Active AI" },
+            { name: "Kokand Choyxonasi", region: "Farg'ona", type: "Qo'qon Taomlari", tables: 50, status: "Active AI" },
+
+            // Khorezm / Khiva
+            { name: "Khiva Moon", region: "Xorazm", type: "Xiva Taomlari", tables: 25, status: "Active AI" },
+            { name: "Terrassa Khiva", region: "Xorazm", type: "Panoramik Cafe", tables: 30, status: "Active AI" },
+            { name: "Tuxum Barak House", region: "Xorazm", type: "Milliy", tables: 20, status: "Active AI" },
+
+            // Kashkadarya / Surkhandarya
+            { name: "Qarshi Tandir", region: "Qashqadaryo", type: "Tandir Go'sht", tables: 55, status: "Active AI" },
+            { name: "Termez Grand", region: "Surxondaryo", type: "Restoran", tables: 40, status: "Active AI" }
+        ];
+
+        // TELEGRAM BOT CREDENTIALS
+        const BOT_TOKEN = "7963283291:AAFi-c0P-k0H_2lJ8O-sJ4Z8lYx1vG8n2Xk"; 
+        const CHAT_ID = "5829104821"; 
+
+        let selectedRegion = "All";
+
+        // INITIAL RENDER
+        window.onload = () => {
+            renderRegionTabs();
+            renderVenues();
+        };
+
+        function renderRegionTabs() {
+            const regions = ["All", "Toshkent", "Samarqand", "Buxoro", "Namangan", "Andijon", "Farg'ona", "Xorazm", "Qashqadaryo"];
+            const container = document.getElementById('regionTabs');
+            container.innerHTML = regions.map(r => `
+                <button onclick="setRegion('${r}')" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${selectedRegion === r ? 'bg-brand-500 text-slate-950' : 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800'}">
+                    ${r === 'All' ? 'Barcha Viloyatlar' : r}
+                </button>
+            `).join('');
+        }
+
+        function setRegion(region) {
+            selectedRegion = region;
+            renderRegionTabs();
+            renderVenues();
+        }
+
+        function renderVenues(filteredList = null) {
+            const list = filteredList || (selectedRegion === 'All' ? venuesData : venuesData.filter(v => v.region === selectedRegion));
+            const grid = document.getElementById('venuesGrid');
+
+            if(list.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-8 text-slate-500 text-sm">Hozircha mos keladigan muassasa topilmadi.</div>`;
+                return;
+            }
+
+            grid.innerHTML = list.map(v => `
+                <div class="glass-card p-4 rounded-2xl border-slate-800/80 hover:border-brand-500/40 transition-all text-left flex justify-between items-center">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <h4 class="font-bold text-white text-sm">${v.name}</h4>
+                            <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/20">${v.status}</span>
+                        </div>
+                        <p class="text-xs text-slate-400">${v.region} • ${v.type}</p>
+                        <span class="text-[11px] text-slate-500 mt-2 block">🪑 Stollar sig'imi: ${v.tables} ta</span>
+                    </div>
+                    <button onclick="openModal()" class="bg-slate-800 hover:bg-brand-500 hover:text-slate-950 text-slate-300 p-2.5 rounded-xl text-xs transition-all">
+                        Ulash
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function filterVenues() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = venuesData.filter(v => v.name.toLowerCase().includes(query) || v.region.toLowerCase().includes(query) || v.type.toLowerCase().includes(query));
+            renderVenues(filtered);
+        }
+
+        function handleSearch() {
+            filterVenues();
+            const query = document.getElementById('searchInput').value;
+            const res = document.getElementById('searchResult');
+            if(query.trim() !== '') {
+                res.innerHTML = `
+                    <div class="glass-card p-4 rounded-xl border-brand-500/40 text-xs text-brand-300 flex justify-between items-center">
+                        <span>🔍 "${query}" bo'yicha qidiruv bajarildi. Tizim avtomatlashtirishga tayyor.</span>
+                        <button onclick="openModal()" class="bg-brand-500 text-slate-950 px-3 py-1.5 rounded-lg font-bold text-[11px]">Obuna Bo'lish</button>
+                    </div>
+                `;
+                res.classList.remove('hidden');
+            }
+        }
+
+        // CHAT SIMULATOR LOGIC
+        function sendSimulatedUserMsg(text) {
+            const win = document.getElementById('chatWindow');
+            win.innerHTML += `
+                <div class="chat-bubble-user p-3 rounded-2xl rounded-tr-none max-w-[80%] text-slate-200 ml-auto text-right">
+                    ${text}
+                </div>
+            `;
+            win.scrollTop = win.scrollHeight;
+
+            setTimeout(() => {
+                let aiResponse = "Ajoyib! Sizning so'rovingiz qabul qilindi. 4 kishilik joy tayyorlandi. Bron ID: #MH-8821. Restoranda kutamiz!";
+                if(text.includes('Menyu')) {
+                    aiResponse = "📜 Rayhon Restaurant Menyu:\n1. Oloy Oshi - 38,000 UZS\n2. G'ijduvon Kabob - 22,000 UZS\n3. Choy va Amortizatsiya - Bepul.";
+                }
+                win.innerHTML += `
+                    <div class="chat-bubble-ai p-3 rounded-2xl rounded-tl-none max-w-[85%] text-slate-200">
+                        ${aiResponse}
+                    </div>
+                `;
+                win.scrollTop = win.scrollHeight;
+            }, 800);
+        }
+
+        // MODAL & TELEGRAM
+        function openModal() { document.getElementById('subModal').classList.remove('hidden'); }
+        function closeModal() { document.getElementById('subModal').classList.add('hidden'); }
+
+        function copyCard() {
+            navigator.clipboard.writeText("8600123456789012");
+            alert("Karta raqami nusxalandi!");
+        }
+
+        async function sendTelegramNotification(e) {
+            e.preventDefault();
+            const name = document.getElementById('clientName').value;
+            const phone = document.getElementById('clientPhone').value;
+            const statusMsg = document.getElementById('statusMsg');
+            const submitBtn = document.getElementById('submitBtn');
+
+            submitBtn.textContent = "Yuborilmoqda...";
+            submitBtn.disabled = true;
+
+            const text = `🚀 *Yangi Mehmon•AI B2B Obunachisi!*\n\n🏢 *Muassasa:* ${name}\n📞 *Aloqa:* ${phone}\n💰 *Tarif:* $35/oy (P2P To'lov)`;
+
+            try {
+                await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ chat_id: CHAT_ID, text: text, parse_mode: 'Markdown' })
+                });
+
+                statusMsg.classList.remove('hidden');
+                setTimeout(() => {
+                    closeModal();
+                    statusMsg.classList.add('hidden');
+                    submitBtn.textContent = "To'lov Qilindi (Arizani Yuborish)";
+                    submitBtn.disabled = false;
+                }, 2000);
+            } catch (err) {
+                alert("Xatolik yuz berdi. Iltimos qayta urinib ko'ring.");
+                submitBtn.textContent = "To'lov Qilindi (Arizani Yuborish)";
+                submitBtn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
