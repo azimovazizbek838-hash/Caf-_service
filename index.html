@@ -405,6 +405,84 @@
 
         <!-- DATA & JAVASCRIPT ENGINE -->
     <script>
+        // Taomlar bazasi (Demo uchun local array)
+let currentCafeDishes = [];
+
+// Admin: Rasm yuklanganda ko'rsatish
+function previewDishImage(event) {
+    const reader = new FileReader();
+    reader.onload = function() {
+        const output = document.getElementById('imagePreview');
+        output.src = reader.result;
+        output.classList.remove('hidden');
+        document.getElementById('uploadPlaceholder').classList.add('hidden');
+    }
+    reader.readAsDataURL(event.target.files[0]);
+}
+
+// Admin: Taom qo'shish
+function handleDishSubmit(event) {
+    event.preventDefault();
+    const name = document.getElementById('dishName').value;
+    const price = parseInt(document.getElementById('dishPrice').value);
+    const imageSrc = document.getElementById('imagePreview').src || 'https://via.placeholder.com/150';
+
+    const newDish = { id: Date.now(), name, price, imageSrc, count: 0 };
+    currentCafeDishes.push(newDish);
+
+    alert(`"${name}" menyuga muvaffaqiyatli qo'shildi!`);
+    document.getElementById('addDishForm').reset();
+    document.getElementById('imagePreview').classList.add('hidden');
+    document.getElementById('uploadPlaceholder').classList.remove('hidden');
+}
+
+// Mijoz: Kafe sahifasini ochish (Landing page'dagi kafe bosilganda)
+function openCafeForClient(cafeName) {
+    document.getElementById('clientCafeTitle').innerText = cafeName;
+    document.getElementById('cafeAdminPanel').classList.add('hidden');
+    document.getElementById('clientMenuView').classList.remove('hidden');
+    renderClientDishes();
+}
+
+// Mijoz: Taomlarni render qilish [-] 1 [+] bilan
+function renderClientDishes() {
+    const container = document.getElementById('dishesListContainer');
+    container.innerHTML = '';
+
+    if (currentCafeDishes.length === 0) {
+        container.innerHTML = `<p class="text-center text-slate-500 py-8 text-sm">Hozircha ushbu kafeda taomlar qo'shilmagan.</p>`;
+        return;
+    }
+
+    currentCafeDishes.forEach(dish => {
+        container.innerHTML += `
+            <div class="flex items-center justify-between p-3.5 bg-slate-900/90 border border-slate-800 rounded-2xl hover:border-slate-700 transition-all">
+                <div class="w-16 h-16 rounded-xl overflow-hidden bg-slate-800 shrink-0 border border-slate-700/50">
+                    <img src="${dish.imageSrc}" alt="${dish.name}" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-1 ml-3.5 pr-2">
+                    <h4 class="text-white font-bold text-sm leading-tight">${dish.name}</h4>
+                    <p class="text-emerald-400 font-mono text-xs font-semibold mt-1">${dish.price.toLocaleString()} UZS</p>
+                </div>
+                <div class="flex items-center bg-slate-800/90 rounded-xl p-1 border border-slate-700/80">
+                    <button onclick="updateCount(${dish.id}, -1)" class="w-7 h-7 flex items-center justify-center text-slate-300 font-bold hover:bg-slate-700 rounded-lg transition-all">-</button>
+                    <span id="count-${dish.id}" class="px-2.5 text-xs font-bold text-white font-mono">${dish.count}</span>
+                    <button onclick="updateCount(${dish.id}, 1)" class="w-7 h-7 flex items-center justify-center text-brand-400 font-bold bg-brand-500/20 hover:bg-brand-500/30 rounded-lg transition-all">+</button>
+                </div>
+            </div>
+        `;
+    });
+}
+
+// Mijoz: Soni oshirish/kamaytirish
+function updateCount(dishId, change) {
+    const dish = currentCafeDishes.find(d => d.id === dishId);
+    if (dish) {
+        dish.count = Math.max(0, dish.count + change);
+        document.getElementById(`count-${dishId}`).innerText = dish.count;
+    }
+}
+
         // 85+ REAL RESTAURANTS DATA (UZBEKISTAN REGIONS)
         const venuesData = [
             // Toshkent
