@@ -1,7 +1,7 @@
 import requests
 
 # Botingiz sozlamalari
-TELEGRAM_BOT_TOKEN = "8942664865:AAFiMTbA3h_FA7ib8RfzUNQoQjHwbLE_7mY"  # BotFather bergan token
+TELEGRAM_BOT_TOKEN = "8942664865:AAEmQFsx0lGLkfXfYfgtJYtMxEdLESb-wC8"  # BotFather bergan token
 MY_CHAT_ID = "7489693239"       # Userinfobot bergan ID
 
 def send_telegram_notification(cafe_name, phone_number, current_venue_count, max_venues=850):
