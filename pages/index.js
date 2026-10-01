@@ -96,21 +96,6 @@ export default function Home() {
       }}>
         <div style={{ fontWeight: '800', fontSize: '20px', color: '#FFC107', letterSpacing: '-0.5px' }}>
           Mehmon•AI
-            <footer style={{ textAlign: 'center', padding: '30px 20px', backgroundColor: '#0b0f19', borderTop: '1px solid #1e293b', color: '#888', fontSize: '13px' }}>
-  <div style={{ marginBottom: '15px' }}>
-    <a href="/oferta" style={{ color: '#aaa', margin: '0 12px', textDecoration: 'none' }}>Ommaviy oferta</a>
-    |
-    <a href="/privacy" style={{ color: '#aaa', margin: '0 12px', textDecoration: 'none' }}>Maxfiylik siyosati</a>
-  </div>
-
-  <div style={{ marginBottom: '10px', color: '#666' }}>
-    YTT "Otangizning F.I.SH" | STIR: XXXXXXXXX | Tel: +998 (XX) XXX-XX-XX
-  </div>
-
-  <div>
-    © 2026 MEHMON.AI — O'zbekiston HoReCa Innovatsiya Tizimi. Barcha huquqlar himoyalangan.
-  </div>
-</footer>
         </div>
         
         <button 
