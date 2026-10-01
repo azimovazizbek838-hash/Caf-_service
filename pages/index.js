@@ -40,7 +40,7 @@ export default function Home() {
             boxShadow: '0 4px 12px rgba(255, 193, 7, 0.2)'
           }}
         >
-          $35 Obuna bo'lish
+          450.000UZS Obuna bo'lish
         </button>
       </header>
 
@@ -112,7 +112,7 @@ export default function Home() {
             boxShadow: '0 4px 12px rgba(255, 193, 7, 0.2)'
           }}
         >
-          $35 Obuna bo'lish
+          450.000UZS Obuna bo'lish
         </button>
       </header>
 
