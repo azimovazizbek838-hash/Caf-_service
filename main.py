@@ -4,7 +4,7 @@ import requests
 TELEGRAM_BOT_TOKEN = "8821029431:AAGalXpGxEP144sdTirzBq2a4J1scp2NdYs"  # BotFather bergan token
 MY_CHAT_ID = "7489693239"       # Userinfobot bergan ID
 
-def send_telegram_notification(cafe_name, phone_number, current_venue_count, max_venues=850):
+def send_telegram_notification(cafe_name, phone_number, current_venue_count, max_venues=450):
     """
     Yangi kafe tizimga qo'shilganda faqat sizning Telegram'ingizga
     real-time bildirishnoma yuboruvchi funksiya.
